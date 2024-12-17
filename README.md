@@ -79,4 +79,22 @@ Em seguida quando em Courses module, nao precisamos mais declarar os imports e s
         AppMaterialModule
     ]
 
+## Iniciando manipulação com HTTP (COMMON HTTP)
+Como vamos mexer com APi do Spring nao criada ainda, pois vamos primeiro "organizar o front"
+Em seguida receber o back
 
+NO COURSES SERVICE 
+    import { HttpClient } from '@angular/common/http'
+    constructor(private httpClient:HttpClient) { }
+
+Basicamente, quando manipulação com API ou recursos HTTP, uma melhor maneira é por uma classe de Serviços, 
+
+Junto a isso, como ja inserido isso em Services, ainda necessario inserí-lo dentro de APP MODULE
+	HttpClientModule, feito isso ele importa automagicamente Rsrs
+
+## Note O Observable em Courses e em HTML que ele nao esta fazendo um *ngFor
+Essa tabela do Angular Material, ela trata os dados, ja tendo em mente que vira 
+    ou de Array, 
+    ou de Observable
+
+Sendo assim, ele automaticamente ja esta tratando e nos so precisamos devolver com um OBSERVABLE  Diamond ou Generics(em java)  <> De Courses 

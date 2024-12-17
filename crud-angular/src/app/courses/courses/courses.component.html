@@ -3,27 +3,37 @@
 	<mat-toolbar color="primary">
 		<span>My Application</span>
 	</mat-toolbar>
-	<mat-card-content>
-		<table mat-table [dataSource]="courses" class="mat-elevation-z8">
+	<div class="courses__content" *ngIf="courses$ | async as courses; else loading"><!-- 'async' SEPARA ITENS DE UM ARRAY -->
+		<mat-card-content>
+			<table mat-table [dataSource]="courses" class="mat-elevation-z8">
 
-			<!--- Note that these columns can be defined in any order.
-				The actual rendered columns are set as a property on the row definition" -->
+				<!--- Note that these columns can be defined in any order.
+					The actual rendered columns are set as a property on the row definition" -->
 
-			<!-- Position Column -->
-			<ng-container matColumnDef="name">
-			<th mat-header-cell *matHeaderCellDef> Nome </th>
-			<td mat-cell *matCellDef="let course"> {{course.name}} </td>
-			</ng-container>
+				<!-- Position Column -->
+				<ng-container matColumnDef="name">
+				<th mat-header-cell *matHeaderCellDef> Nome </th>
+				<td mat-cell *matCellDef="let course"> {{course.name}} </td>
+				</ng-container>
 
-			<!-- Name Column -->
-			<ng-container matColumnDef="category">
-			<th mat-header-cell *matHeaderCellDef> Categoria </th>
-			<td mat-cell *matCellDef="let course"> {{course.category}} </td>
-			</ng-container>
+				<!-- Name Column -->
+				<ng-container matColumnDef="category">
+				<th mat-header-cell *matHeaderCellDef> Categoria </th>
+				<td mat-cell *matCellDef="let course"> {{course.category}} </td>
+				</ng-container>
 
-			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-		</table>
-	</mat-card-content>
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+			</table>
+		</mat-card-content>
+	</div>
+	<ng-template #loading>
+
+		<div class="courses__loading">
+					<mat-spinner>
+
+			</mat-spinner>
+		</div>
+	</ng-template>
 </mat-card>
 

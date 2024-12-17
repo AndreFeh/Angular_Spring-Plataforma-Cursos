@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../models/course';
 import { CoursesService } from '../services/courses.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-courses',
@@ -10,12 +11,16 @@ import { CoursesService } from '../services/courses.service';
   styleUrl: './courses.component.css'
 })
 export class CoursesComponent implements OnInit {
-	courses:Course[] = []; /*PARA NAO FICAR EM ANY, VAMOS CRIAR UMA INTERFACE COM O MODELO QUE DEVE SER SEGUIDO*/
+	courses$:Observable<Course[]>;	/** BOAS PRATICAS PARA INFORMAR QUE ISSO É UM OBSERVABLE */
+	/*PARA NAO FICAR EM ANY, VAMOS CRIAR UMA INTERFACE COM O MODELO QUE DEVE SER SEGUIDO*/
+	/*PARA NAO FICAR RECLAMANDO, PODEMOS INSERÍ-LO DENTRO DE CONSTRUCTOR, CHAMANDO O METODO DE LISTAR OS ELEMENTOS DE DADOS VINDOS DE UMA API BACK */
 	displayedColumns= ['name', 'category'];
-	constructor(coursesService:CoursesService){
-		this.courses = coursesService.list();
+
+	constructor(private coursesService:CoursesService){
+		this.courses$ = this.coursesService.list();
 	}
 	ngOnInit(): void {
+
 	}
 
 }
